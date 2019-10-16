@@ -5,9 +5,10 @@ import {
   deleteItemAction
 } from "./store/actionFun";
 
-import "antd/dist/antd.css";
-import { Input, Button, List } from "antd";
+// import "antd/dist/antd.css";
+// import { Input, Button, List } from "antd";
 import store from "./store";
+import TodolistUI from "./todolistUI";
 
 class TodoList extends Component {
   storeChange() {
@@ -21,38 +22,47 @@ class TodoList extends Component {
     // 交互事件
     this.inputChange = this.inputChange.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   render() {
     return (
-      <div style={{ margin: "10px" }}>
-        <div>
-          <Input
-            value={this.state.inputValue}
-            placeholder="write someting"
-            onChange={this.inputChange}
-            style={{ width: "250px", marginRight: "10px" }}
-          />
-          <Button type="primary" onClick={this.addItem}>
-            增加
-          </Button>
-        </div>
-        <div style={{ margin: "10px", width: "300px" }}>
-          <List
-            bordered
-            dataSource={this.state.list}
-            renderItem={(item, index) => (
-              <List.Item>
-                {/* {item} */}
-                <span className="m">{item}</span>
-                <span className="m" onClick={this.deleteItem.bind(this, index)}>
-                  删除
-                </span>
-              </List.Item>
-            )}
-          />
-        </div>
-      </div>
+      // dom拆分后的写法
+      <TodolistUI
+        inputValue={this.state.inputValue}
+        list={this.state.list}
+        inputChange={this.inputChange}
+        addItem={this.addItem}
+        deleteItem={this.deleteItem}
+      ></TodolistUI>
+      //   dom拆分前的写法
+      //   <div style={{ margin: "10px" }}>
+      //     <div>
+      //       <Input
+      //         value={this.state.inputValue}
+      //         placeholder="write someting"
+      //         onChange={this.inputChange}
+      //         style={{ width: "250px", marginRight: "10px" }}
+      //       />
+      //       <Button type="primary" onClick={this.addItem}>
+      //         增加
+      //       </Button>
+      //     </div>
+      //     <div style={{ margin: "10px", width: "300px" }}>
+      //       <List
+      //         bordered
+      //         dataSource={this.state.list}
+      //         renderItem={(item, index) => (
+      //           <List.Item>
+      //             <span className="m">{item}</span>
+      //             <span className="m" onClick={() => this.deleteItem(index)}>
+      //               删除
+      //             </span>
+      //           </List.Item>
+      //         )}
+      //       />
+      //     </div>
+      //   </div>
     );
   }
 

@@ -19,7 +19,7 @@ export default (state = defaultState, action) => {
     return newState;
   }
   if (action.type === DELETE_ITEM) {
-    newState.list.splice(action.index, 1);
+    newState.list.splice(action.value, 1);
     return newState;
   }
   return state;
